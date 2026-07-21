@@ -1,0 +1,5 @@
+goblog.exe
+uploads/*
+!uploads/.gitkeep
+.env
+*.log
