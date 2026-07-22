@@ -1,0 +1,47 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    image: fingerprint-server:latest
+    container_name: fingerprint-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./rules:/rules:ro
+    networks:
+      - fingerprint-net
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    image: fingerprint-client:latest
+    container_name: fingerprint-client
+    depends_on:
+      server:
+        condition: service_healthy
+    volumes:
+      - ./testdata:/data:ro
+    networks:
+      - fingerprint-net
+    stdin_open: true
+    tty: true
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+networks:
+  fingerprint-net:
+    driver: bridge

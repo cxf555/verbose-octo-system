@@ -1,0 +1,30 @@
+{
+  "protocol": "SSH",
+  "default_ports": [22],
+  "products": [
+    {
+      "name": "OpenSSH",
+      "patterns": [
+        {
+          "regex": "^SSH-[\\d.]+-OpenSSH[_\\s]+(?P<version>[\\d.]+(?:p\\d+)?)",
+          "confidence_boost": 0.3
+        }
+      ],
+      "os_patterns": {
+        "Ubuntu": "(?i)ubuntu",
+        "Debian": "(?i)debian",
+        "CentOS": "(?i)centos",
+        "RHEL": "(?i)rhel|red.?hat"
+      }
+    },
+    {
+      "name": "Dropbear",
+      "patterns": [
+        {
+          "regex": "^SSH-(?P<version>[\\d.]+).*dropbear",
+          "confidence_boost": 0.3
+        }
+      ]
+    }
+  ]
+}
