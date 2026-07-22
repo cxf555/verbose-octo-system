@@ -1,0 +1,28 @@
+# Stage 1: build
+FROM golang:1.22-alpine AS build
+
+RUN apk add --no-cache git ca-certificates
+
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /server ./cmd/server/
+
+# Stage 2: run
+FROM alpine:3.20
+
+RUN addgroup -g 10001 appgroup && \
+    adduser -u 10001 -G appgroup -D -s /sbin/nologin appuser
+
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build /server /server
+
+USER appuser
+EXPOSE 8080
+
+HEALTHCHECK --interval=10s --timeout=3s --retries=3 \
+    CMD wget -qO- http://localhost:8080/health || exit 1
+
+ENTRYPOINT ["/server", "-addr", ":8080", "-rules", "/rules"]

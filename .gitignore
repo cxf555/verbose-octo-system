@@ -1,0 +1,33 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+/server
+/client
+
+# Test binary
+*.test
+
+# Output
+*.out
+
+# Go workspace
+go.work
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+/tmp/
+testdata/gen_json.go
+testdata/gen_test.py
+testdata/user_test.json

@@ -1,0 +1,46 @@
+{
+  "protocol": "FTP",
+  "default_ports": [21, 2121],
+  "products": [
+    {
+      "name": "ProFTPD",
+      "patterns": [
+        {
+          "regex": "(?i)220.*ProFTPD\\s*(?P<version>[\\d.]+[a-z]?)",
+          "confidence_boost": 0.3
+        }
+      ]
+    },
+    {
+      "name": "vsftpd",
+      "patterns": [
+        {
+          "regex": "(?i)220.*vsftpd?\\s*(?P<version>[\\d.]+)",
+          "confidence_boost": 0.3
+        },
+        {
+          "regex": "(?i)220.*\\(vsFTPd?\\s*(?P<version>[\\d.]+)\\)",
+          "confidence_boost": 0.3
+        }
+      ]
+    },
+    {
+      "name": "Pure-FTPd",
+      "patterns": [
+        {
+          "regex": "(?i)220.*Pure-FTPd\\s*\\[?.*\\]?",
+          "confidence_boost": 0.25
+        }
+      ]
+    },
+    {
+      "name": "Microsoft FTP",
+      "patterns": [
+        {
+          "regex": "(?i)220.*Microsoft FTP",
+          "confidence_boost": 0.3
+        }
+      ]
+    }
+  ]
+}

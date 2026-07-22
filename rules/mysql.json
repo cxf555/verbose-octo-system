@@ -1,0 +1,44 @@
+{
+  "protocol": "MySQL",
+  "default_ports": [3306, 3307],
+  "products": [
+    {
+      "name": "MySQL",
+      "patterns": [
+        {
+          "regex": "(?P<version>\\d+\\.\\d+\\.\\d+).*MySQL",
+          "confidence_boost": 0.3
+        },
+        {
+          "regex": "MySQL.*?(?P<version>\\d+\\.\\d+\\.\\d+)",
+          "confidence_boost": 0.3
+        },
+        {
+          "regex": "mysql_native_password",
+          "confidence_boost": 0.1
+        },
+        {
+          "regex": "caching_sha2_password",
+          "confidence_boost": 0.1
+        },
+        {
+          "regex": "(?P<version>\\d+\\.\\d+\\.\\d+)",
+          "confidence_boost": 0.2
+        }
+      ]
+    },
+    {
+      "name": "MariaDB",
+      "patterns": [
+        {
+          "regex": "(?P<version>\\d+\\.\\d+\\.\\d+).*MariaDB",
+          "confidence_boost": 0.3
+        },
+        {
+          "regex": "MariaDB.*?(?P<version>\\d+\\.\\d+\\.\\d+)",
+          "confidence_boost": 0.3
+        }
+      ]
+    }
+  ]
+}

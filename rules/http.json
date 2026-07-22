@@ -1,0 +1,45 @@
+{
+  "protocol": "HTTP",
+  "default_ports": [80, 443, 8080, 8443, 8000],
+  "products": [
+    {
+      "name": "nginx",
+      "patterns": [
+        {
+          "regex": "(?i)Server:\\s*nginx/(?P<version>[\\d.]+)",
+          "confidence_boost": 0.3
+        },
+        {
+          "regex": "(?i)nginx/(?P<version>[\\d.]+)",
+          "confidence_boost": 0.25
+        }
+      ]
+    },
+    {
+      "name": "Apache",
+      "patterns": [
+        {
+          "regex": "(?i)Server:\\s*Apache/(?P<version>[\\d.]+)",
+          "confidence_boost": 0.3
+        },
+        {
+          "regex": "(?i)Apache/(?P<version>[\\d.]+)\\s",
+          "confidence_boost": 0.25
+        }
+      ]
+    },
+    {
+      "name": "Jetty",
+      "patterns": [
+        {
+          "regex": "(?i)Server:\\s*Jetty\\((?P<version>[\\d.]+\\.[\\w.]+)\\)",
+          "confidence_boost": 0.3
+        },
+        {
+          "regex": "(?i)Jetty/(?P<version>[\\d.]+\\.[\\w.]+)",
+          "confidence_boost": 0.3
+        }
+      ]
+    }
+  ]
+}

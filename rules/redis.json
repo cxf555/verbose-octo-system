@@ -1,0 +1,39 @@
+{
+  "protocol": "Redis",
+  "default_ports": [6379, 6380],
+  "products": [
+    {
+      "name": "Redis",
+      "patterns": [
+        {
+          "regex": "(?i)redis_version:\\s*(?P<version>[\\d.]+)",
+          "confidence_boost": 0.35
+        },
+        {
+          "regex": "(?i)-ERR.*[Rr]edis",
+          "confidence_boost": 0.2
+        },
+        {
+          "regex": "(?i)-NOAUTH.*[Rr]edis",
+          "confidence_boost": 0.2
+        },
+        {
+          "regex": "^\\-NOAUTH\\s",
+          "confidence_boost": 0.2
+        },
+        {
+          "regex": "^\\-ERR\\s",
+          "confidence_boost": 0.15
+        },
+        {
+          "regex": "(?i)\\+PONG",
+          "confidence_boost": 0.15
+        },
+        {
+          "regex": "(?i)-DENIED.*[Rr]edis",
+          "confidence_boost": 0.2
+        }
+      ]
+    }
+  ]
+}
